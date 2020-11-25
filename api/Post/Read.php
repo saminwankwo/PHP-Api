@@ -31,9 +31,9 @@ if($num > 0){
             'id' => $id,
             'title' => $title,
             'body' => html_entity_decode($body),
-            'author' => $author;
+            'author' => $author,
             'category_id' => $category_id,
-            'category_name' => $category_name;
+            'category_name' => $category_name
         );
 
         // push to data
@@ -43,7 +43,9 @@ if($num > 0){
     echo json_encode($posts_arr);
 } else {
     // No Post
-    echo json_encode(array('message' -> 'No Post found'));
+    echo json_encode(
+      array('message' => 'No Posts Found')
+    );
 }
 
 ?>
