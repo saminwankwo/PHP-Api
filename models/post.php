@@ -94,7 +94,8 @@ Class Post {
     // update Post
     public function update(){
         // create query
-        $query = 'INSERT INTO '.$this->table.' SET title = :title, body = :body, author = :author, category_id = :category_id';
+        $query = 'UPDATE ' .$this->table.' SET title = :title, body = :body, author = :author, category_id = :category_id
+        WHERE id = :id';
 
         // prepare statement
         $stmt = $this->conn->prepare($query);
@@ -104,6 +105,7 @@ Class Post {
         $this->body = htmlspecialchars(strip_tags($this->body));
         $this->author = htmlspecialchars(strip_tags($this->author));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+        $this->id = htmlspecialchars(strip_tags($this->id));
 
         
         // Bind data
@@ -111,6 +113,7 @@ Class Post {
         $stmt->bindParam(':body', $this->body);
         $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':category_id', $this->category_id);
+        $stmt->bindParam(':id', $this->id);
 
           // Execute query
         if($stmt->execute()) {
@@ -121,6 +124,13 @@ Class Post {
         printf("Error: %s.\n", $stmt->error);
 
         return false;
+    }
+
+    // Delete Post 
+    public function delete(){
+        // create Query
+
+        $query = 'DELETE FROM ' .$this->table .'WHERE = :id';
     }
 } 
 ?>
